@@ -2,256 +2,339 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Для Дашеньки ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart-BUY — Сервисный центр</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            background-color: #0a0a1a;
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-            overflow: hidden; /* Чтобы салют не создавал прокрутку */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #00d4ff;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #00ff88;
         }
 
-        /* Холст для салюта на весь экран */
-        #canvas {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Навигация */
+        header {
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            background: rgba(18, 18, 18, 0.95);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
         }
 
-        .content {
-            position: relative;
-            z-index: 2; /* Поверх салюта */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Главный экран */
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        h1 {
-            font-size: 1.4rem;
-            color: #ff4d6d;
-            text-align: center;
-            margin-top: 10px;
-            text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .gift-container {
-            position: relative;
-            width: 320px; 
-            height: 200px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .white-square {
-            width: 140px;
-            height: 140px;
-            background-color: white;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            box-shadow: 0 0 30px rgba(255,255,255,0.2);
-        }
-
-        .white-square::after {
-            content: "ПЕРЕД";
-            color: #333;
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-
-        .usb-line {
-            position: absolute;
-            left: 145px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
             align-items: center;
-            width: 175px;
-        }
-
-        .btn-text-block {
-            position: absolute;
-            left: 145px;
-            bottom: 10px;
-            width: 175px;
-        }
-
-        .arrow {
-            color: #00d4ff;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-right: 5px;
-        }
-
-        .text {
-            font-size: 0.8rem;
-            line-height: 1.2;
-        }
-
-        .highlight {
-            color: #ff4d6d;
-            font-weight: bold;
-        }
-
-        .kit-info {
-            margin-top: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 15px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 77, 109, 0.3);
-        }
-
-        .footer {
-            margin-top: auto;
             text-align: center;
-            padding: 20px 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            padding: 0 20px;
         }
 
-        .heart {
-            display: inline-block;
-            color: #ff4d6d;
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #007bff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Секции */
+        section {
+            padding: 80px 10% 40px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+
+        /* Услуги */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid #333;
+        }
+
+        .service-card:hover {
+            border-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Таблица гарантий */
+        .warranty-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .warranty-table th, .warranty-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .warranty-table th {
+            background: var(--primary-color);
+        }
+
+        /* Аналитика и цифры */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .stat-item h3 {
             font-size: 2rem;
-            animation: pulse 1.5s infinite;
+            color: var(--accent-color);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
+        /* Футер */
+        footer {
+            background: #0a0a0a;
+            padding: 50px 10%;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-info p { margin: 5px 0; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            header { flex-direction: column; padding: 10px; }
+            nav { margin-top: 10px; }
+            nav a { margin: 0 10px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="canvas"></canvas>
+    <header>
+        <div class="logo">Smart-BUY</div>
+        <nav>
+            <a href="#about">О нас</a>
+            <a href="#services">Услуги</a>
+            <a href="#warranty">Гарантия</a>
+            <a href="#market">Рынок</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </header>
 
-    <div class="content">
-        <h1>С Новым 2026 Годом, моя любимая Дашенька! 🎄</h1>
-        <div class="subtitle">Это небольшая инструкция как пользоваться твоим подарком))</div>
+    <section class="hero" id="home">
+        <h1>Smart-BUY</h1>
+        <p>Умный выбор долгой жизни ваших гаджетов. Используем оригинальные запчасти и Service Pack'и.</p>
+        <a href="#services" class="btn">Наши услуги</a>
+    </section>
 
-        <div class="gift-container">
-            <div class="white-square"></div>
-
-            <div class="usb-line">
-                <span class="arrow">←</span>
-                <div class="text">
-                    <b>тут разъем type c</b><br>
-                    просто подключи кабель и чуть-чуть подожди
-                </div>
+    <section id="about">
+        <h2>Наши цели</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-tools"></i>
+                <h3>200+</h3>
+                <p>ремонтов ежемесячно</p>
             </div>
-
-            <div class="btn-text-block">
-                <div class="text">
-                    <span class="highlight">нажми на кнопочку с права чтоб поменять режим</span>
-                </div>
+            <div class="service-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>15%</h3>
+                <p>доля рынка города</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-check-circle"></i>
+                <h3>Original</h3>
+                <p>Только оригинальные детали</p>
             </div>
         </div>
+    </section>
 
-        <div class="kit-info">
-            🔌 Кабель и блочок уже в комплекте!
+    <section id="services" style="background: #1a1a1a;">
+        <h2>Что мы чиним</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Смартфоны</h3>
+                <p>Ремонт любой сложности, замена модулей и сложная пайка под микроскопом.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-laptop"></i>
+                <h3>Компьютеры</h3>
+                <p>Обслуживание, чистка и профессиональная сборка ПК из лучших комплектующих.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Консоли</h3>
+                <p>Ремонт и обслуживание игровых приставок и аксессуаров.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-tv"></i>
+                <h3>Бытовая техника</h3>
+                <p>Ремонт домашней техники с большим ассортиментом запчастей в наличии.</p>
+            </div>
         </div>
+    </section>
 
-        <div class="footer">
-            <span class="heart">❤️</span>
-            <p style="font-size: 1.2rem; margin: 5px 0;">Я люблю тебя!</p>
+    <section id="warranty">
+        <h2>Сроки гарантии</h2>
+        <table class="warranty-table">
+            <thead>
+                <tr>
+                    <th>Вид устройства</th>
+                    <th>Срок гарантии</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Носимые устройства</td>
+                    <td>От 2 до 6 месяцев</td>
+                </tr>
+                <tr>
+                    <td>Сборка компьютеров</td>
+                    <td>От 1 года</td>
+                </tr>
+                <tr>
+                    <td>Игровые приставки</td>
+                    <td>От 6 месяцев</td>
+                </tr>
+                <tr>
+                    <td>Общий ремонт</td>
+                    <td>От 2 до 6 месяцев</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="market" style="background: #1a1a1a;">
+        <h2>Аналитика рынка</h2>
+        <div class="stats">
+            <div class="stat-item">
+                <h3>+30%</h3>
+                <p>Рост спроса на ремонт</p>
+            </div>
+            <div class="stat-item">
+                <h3>40%</h3>
+                <p>Рентабельность</p>
+            </div>
+            <div class="stat-item">
+                <h3>-10%</h3>
+                <p>Скидка на первый заказ</p>
+            </div>
         </div>
-    </div>
+        <p style="text-align:center; margin-top:30px; max-width:800px; margin-left:auto; margin-right:auto;">
+            Рынок электроники растет. Из-за цен на новые гаджеты люди чаще выбирают качественный ремонт. 
+            Наша ЦА: студенты, офисные сотрудники и активные пользователи соцсетей.
+        </p>
+    </section>
 
-    <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
+    <footer id="contacts">
+        <h2>Связаться с нами</h2>
+        <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> г. Кишинев, Улица Руссу Андрея Николаевича 17</p>
+            <p><i class="fas fa-envelope"></i> Принимаем заказы через сайт и мессенджеры</p>
+            <p><i class="fas fa-user-shield"></i> Сертифицированные инженеры (опыт 3+ года)</p>
+        </div>
+        <div style="margin-top: 30px;">
+            <p>&copy; 2026 Smart-BUY. Умный выбор — долгая жизнь.</p>
+        </div>
+    </footer>
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        class Particle {
-            constructor(x, y, color) {
-                this.x = x;
-                this.y = y;
-                this.color = color;
-                this.velocity = {
-                    x: (Math.random() - 0.5) * 8,
-                    y: (Math.random() - 0.5) * 8
-                };
-                this.alpha = 1;
-                this.friction = 0.95;
-            }
-
-            draw() {
-                ctx.globalAlpha = this.alpha;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-
-            update() {
-                this.velocity.x *= this.friction;
-                this.velocity.y *= this.friction;
-                this.x += this.velocity.x;
-                this.y += this.velocity.y;
-                this.alpha -= 0.01;
-            }
-        }
-
-        let particles = [];
-
-        function createFirework() {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * (canvas.height * 0.5);
-            const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
-            
-            for (let i = 0; i < 30; i++) {
-                particles.push(new Particle(x, y, color));
-            }
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.fillStyle = 'rgba(10, 10, 26, 0.2)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach((particle, index) => {
-                if (particle.alpha > 0) {
-                    particle.update();
-                    particle.draw();
-                } else {
-                    particles.splice(index, 1);
-                }
-            });
-        }
-
-        // Запуск салютов
-        setInterval(createFirework, 800);
-        animate();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
 </body>
 </html>
